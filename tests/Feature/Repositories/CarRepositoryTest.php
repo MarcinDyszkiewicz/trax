@@ -4,6 +4,7 @@ namespace Tests\Feature\Repositories;
 
 use App\DTOs\CarDTO;
 use App\Models\Car;
+use App\Models\Trip;
 use App\Repositories\CarRepository;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -36,11 +37,21 @@ class CarRepositoryTest extends TestCase
     public function testFindSingleCar(): void
     {
         $car = Car::factory()->create();
+        Trip::factory()->create([
+            'car_id' => $car->id,
+            'miles' => 10.2,
+        ]);
+        Trip::factory()->create([
+            'car_id' => $car->id,
+            'miles' => 10.4,
+        ]);
 
         $result = $this->repository->find($car->id);
 
         $this->assertInstanceOf(Car::class, $result);
         $this->assertEquals($car->id, $result->id);
+        $this->assertEquals(2, $result->trips_count);
+        $this->assertEquals(20.6, $result->trips_sum_miles);
     }
 
     public function testCreateCar(): void

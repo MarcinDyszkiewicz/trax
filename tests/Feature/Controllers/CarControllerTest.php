@@ -3,7 +3,9 @@
 namespace Tests\Feature\Controllers;
 
 use App\Models\Car;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Passport\Passport;
 use Tests\TestCase;
 
 class CarControllerTest extends TestCase
@@ -12,7 +14,8 @@ class CarControllerTest extends TestCase
 
     protected function setUp(): void
     {
-        parent::setUp(); // TODO: add passport auth
+        parent::setUp();
+        Passport::actingAs(User::factory()->create());
     }
 
     public function testIndexEndpoint(): void
@@ -33,7 +36,16 @@ class CarControllerTest extends TestCase
         $response = $this->getJson(route('cars.show', [$car->id]));
 
         $response->assertOk();
-        $response->assertJsonStructure(['data' => ['id', 'make', 'model', 'year']]);
+        $response->assertJsonStructure([
+            'data' => [
+                'id',
+                'make',
+                'model',
+                'year',
+                'trip_count',
+                'trip_count',
+            ],
+        ]);
         $response->assertJson(['data' => ['id' => $car->id]]);
     }
 
@@ -53,7 +65,6 @@ class CarControllerTest extends TestCase
             'year' => 2021,
         ]);
     }
-
 
     public function testDestroyEndpoint(): void
     {

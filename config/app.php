@@ -162,6 +162,7 @@ return [
 
         // Custom providers
         App\Providers\CarServiceProvider::class,
+        App\Providers\TripServiceProvider::class,
     ],
 
     /*

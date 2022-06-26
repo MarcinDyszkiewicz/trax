@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Car extends Model
+class Trip extends Model
 {
     use HasFactory;
 
-    public function trips(): HasMany
+    public function car(): BelongsTo
     {
-        return $this->hasMany(Trip::class);
+        return $this->belongsTo(Car::class);
     }
 }

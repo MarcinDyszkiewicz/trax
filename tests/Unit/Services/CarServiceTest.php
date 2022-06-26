@@ -10,6 +10,11 @@ use Tests\TestCase;
 
 class CarServiceTest extends TestCase
 {
+    /**
+     * @var CarService
+     */
+    private mixed $service;
+
     public function setUp(): void
     {
         parent::setUp();
@@ -64,6 +69,8 @@ class CarServiceTest extends TestCase
         $this->assertEquals($car->make, $result->getMake());
         $this->assertEquals($car->model, $result->getModel());
         $this->assertEquals($car->year, $result->getYear());
+        $this->assertEquals(null, $result->getTripsCount());
+        $this->assertEquals(null, $result->getTripMiles());
     }
 
     public function testDeleteCar(): void

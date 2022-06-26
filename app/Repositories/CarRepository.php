@@ -22,7 +22,7 @@ class CarRepository implements CarRepositoryInterface
      */
     public function find(int $id): Car
     {
-        return Car::findOrFail($id);
+        return Car::withCount('trips')->withSum('trips', 'miles')->findOrFail($id);
     }
 
     /**

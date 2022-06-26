@@ -74,6 +74,8 @@ class CarService implements CarServiceInterface
             $car->make,
             $car->model,
             $car->year,
+            $car->trips_count,
+            $car->trips_sum_miles
         );
     }
 }

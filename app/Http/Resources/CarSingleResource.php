@@ -23,8 +23,8 @@ class CarSingleResource extends JsonResource
             'make' => $carDTO->getMake(),
             'model' => $carDTO->getModel(),
             'year' => $carDTO->getYear(),
-//            'trip_count' => 2,
-//            'trip_miles' => 18.1
+            'trip_count' => $carDTO->getTripsCount() ?? 0,
+            'trip_miles' => number_format($carDTO->getTripMiles() ?? 0, 1),
         ];
     }
 }
