@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,6 +60,8 @@ Route::get('/mock-get-cars', function(Request $request) {
         ]
     ];
 })->middleware('auth:api');
+
+Route::apiResource('cars', 'CarController');
 
 
 // Mock endpoint to add a new car.
