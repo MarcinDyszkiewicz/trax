@@ -6,7 +6,7 @@ use App\DTOs\CarDTO;
 use App\Models\Car;
 use Illuminate\Database\Eloquent\Collection;
 
-class CarRepository
+class CarRepository implements CarRepositoryInterface
 {
     /**
      * @return Collection<Car>

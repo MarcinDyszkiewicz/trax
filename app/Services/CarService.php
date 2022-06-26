@@ -4,15 +4,15 @@ namespace App\Services;
 
 use App\DTOs\CarDTO;
 use App\Models\Car;
-use App\Repositories\CarRepository;
+use App\Repositories\CarRepositoryInterface;
 use Illuminate\Support\Collection;
 
 
-class CarService
+class CarService implements CarServiceInterface
 {
-    private CarRepository $carRepository;
+    private CarRepositoryInterface $carRepository;
 
-    public function __construct(CarRepository $carRepository)
+    public function __construct(CarRepositoryInterface $carRepository)
     {
         $this->carRepository = $carRepository;
     }

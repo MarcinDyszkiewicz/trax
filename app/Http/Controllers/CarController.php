@@ -6,16 +6,16 @@ use App\DTOs\CarDTO;
 use App\Http\Requests\CarRequest;
 use App\Http\Resources\CarListResource;
 use App\Http\Resources\CarSingleResource;
-use App\Services\CarService;
+use App\Services\CarServiceInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Http\Response;
 
 class CarController extends Controller
 {
-    private CarService $carService;
+    private CarServiceInterface $carService;
 
-    public function __construct(CarService $carService)
+    public function __construct(CarServiceInterface $carService)
     {
         $this->carService = $carService;
     }
@@ -49,7 +49,7 @@ class CarController extends Controller
             )
         );
 
-        return response()->json(['message' => 'Car created'], Response::HTTP_OK);
+        return response()->json(['message' => 'Car created'], Response::HTTP_CREATED);
     }
 
     /**
@@ -76,6 +76,6 @@ class CarController extends Controller
     {
         $this->carService->deleteCar($id);
 
-        return response()->json(['message' => 'Car deleted'], Response::HTTP_CREATED);
+        return response()->json(['message' => 'Car deleted'], Response::HTTP_OK);
     }
 }
