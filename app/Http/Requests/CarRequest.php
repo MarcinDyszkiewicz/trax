@@ -25,8 +25,8 @@ class CarRequest extends FormRequest
     {
         return [
             'year' => 'required|integer',
-            'make' => 'required|string',
-            'model' => 'required|string'
+            'make' => 'required|string|max:255',
+            'model' => 'required|string|max:255'
         ];
     }
 }

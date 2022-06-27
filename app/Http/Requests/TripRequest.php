@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Car;
 use Illuminate\Foundation\Http\FormRequest;
 
 class TripRequest extends FormRequest
@@ -11,7 +12,7 @@ class TripRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -21,11 +22,16 @@ class TripRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'date' => 'required|date', // ISO 8601 string
-            'car_id' => 'required|integer',
+            'date' => 'required|date',
+            // ISO 8601 string
+            'car_id' => [
+                'required',
+                'integer',
+                'exists:' . Car::class . ',id',
+            ],
             'miles' => 'required|numeric',
         ];
     }
